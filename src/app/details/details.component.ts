@@ -13,4 +13,6 @@ export class DetailsComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
+  
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookServiceService } from '../service/book-service.service';
 import { tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-book',
@@ -10,7 +11,10 @@ import { tap } from 'rxjs';
 export class SearchBookComponent {
   searchResults!: any[];
   searchQuery = 'Harry Potter'; // valore input titolo
-  constructor(private bookService: BookServiceService) {}
+  constructor(
+    private bookService: BookServiceService,
+    private router: Router
+  ) {}
 
   searchBooks(): void {
     this.bookService
@@ -28,5 +32,10 @@ export class SearchBookComponent {
         })
       )
       .subscribe();
+  }
+
+  showDetails(titleBook: string) {
+    console.log('Id selezionato uguale a ' + titleBook);
+    this.router.navigateByUrl('/details/' + titleBook);
   }
 }
