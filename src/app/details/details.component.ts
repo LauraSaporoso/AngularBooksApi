@@ -23,7 +23,7 @@ export class DetailsComponent implements OnInit {
     this.bookService.specificBook();
   }
 
-  specificBook(): void {
+  specificBookDetails(): void {
     this.bookService.specificBook().pipe(
       tap({
         next: (data) => {
