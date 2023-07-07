@@ -1,9 +1,23 @@
-<p>details works!</p>
-<button (click)="goBack()">Back</button>
-<div class="book">
-  <h3>{{ resultsFromId.volumeInfo.title }}</h3>
-
-  <p>{{ resultsFromId.volumeInfo.authors?.join(", ") }}</p>
-  <p>{{ resultsFromId.volumeInfo.description }}</p>
-  <img [src]="resultsFromId.volumeInfo.imageLinks.thumbnail" />
+<button mat-raised-button color="warn" class="back-button" (click)="goBack()">
+  Back
+</button>
+<div class="details">
+  <div class="book-details">
+    <h3>
+      <strong>{{ resultsFromId.volumeInfo.title }}</strong>
+    </h3>
+    <div class="details-container">
+      <img [src]="resultsFromId.volumeInfo.imageLinks.thumbnail" />
+      <div class="sub-details-container">
+        <p>
+          <strong>Author:</strong>
+          {{ resultsFromId.volumeInfo.authors?.join(", ") }}
+        </p>
+        <p>
+          <strong>Description</strong>
+          {{ resultsFromId.volumeInfo.description }}
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

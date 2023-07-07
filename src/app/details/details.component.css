@@ -1,0 +1,29 @@
+.back-button {
+  margin: 30px;
+}
+.details {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.book-details {
+  width: 75%;
+}
+.details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.details-container img {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  width: 150px;
+  height: 250px;
+}
+
+@media screen and (max-width: 767px) {
+  .details-container {
+    flex-direction: column;
+  }
+}
