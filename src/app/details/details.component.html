@@ -1,10 +1,9 @@
 <p>details works!</p>
 <button (click)="goBack()">Back</button>
-<!-- <div class="book" *ngFor="let book of resultsFromId">
-  <h3>{{ book.volumeInfo.title }}</h3>
+<div class="book">
+  <h3>{{ resultsFromId.volumeInfo.title }}</h3>
 
-  <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
+  <p>{{ resultsFromId.volumeInfo.authors?.join(", ") }}</p>
 
-  <img [src]="book.volumeInfo.imageLinks.thumbnail" />
+  <img [src]="resultsFromId.volumeInfo.imageLinks.thumbnail" />
 </div>
- -->

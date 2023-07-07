@@ -10,6 +10,7 @@ export class BookServiceService {
   private apiUrlBook = 'https://www.googleapis.com/books/v1/volumes/';
 
   idDetails!: string;
+
   constructor(private http: HttpClient) {}
 
   /*
@@ -17,17 +18,17 @@ export class BookServiceService {
   con PARAMS: https://www.googleapis.com/books/v1/volumes/q=valorediquery&max-results=10
   */
 
+  // chiamata http lista di oggetti
   searchBooks(query: string): Observable<any> {
     const params = {
       q: query,
       maxResults: '10',
     };
-
     return this.http.get<any>(this.apiUrlBooks, { params });
   }
 
+  // chiamata http di 1 solo oggetto
   specificBook(): Observable<any> {
-    console.log('BOOOOOOK ID ' + this.idDetails);
     return this.http.get<any>(this.apiUrlBook + this.idDetails);
   }
 }

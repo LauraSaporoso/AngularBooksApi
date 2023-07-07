@@ -15,28 +15,25 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   idBookFromService!: string;
-  resultsFromId!: any[];
+  resultsFromId!: any;
 
-  newUrl!: any;
-
-  ngOnInit(): void {
-    this.bookService.specificBook();
-  }
+  ngOnInit(): void {}
 
   specificBookDetails(): void {
-    this.bookService.specificBook().pipe(
-      tap({
-        next: (data) => {
-          /*  console.log(data.items); */
-          this.resultsFromId = data.items;
-          console.dir(this.resultsFromId);
-          console.log(this.resultsFromId);
-        },
-        error: (error) => {
-          console.error('An Error occured:', error);
-        },
-      })
-    );
+    this.bookService
+      .specificBook()
+      .pipe(
+        tap({
+          next: (data) => {
+            console.log(data);
+            this.resultsFromId = data;
+          },
+          error: (error) => {
+            console.error('An Error occured:', error);
+          },
+        })
+      )
+      .subscribe();
   }
 
   goBack() {
