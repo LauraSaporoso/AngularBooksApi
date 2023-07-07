@@ -17,7 +17,11 @@ export class DetailsComponent implements OnInit {
   idBookFromService!: string;
   resultsFromId!: any;
 
-  ngOnInit(): void {}
+  newUrl!: any;
+
+  ngOnInit(): void {
+    console.log(this.specificBookDetails());
+  }
 
   specificBookDetails(): void {
     this.bookService
