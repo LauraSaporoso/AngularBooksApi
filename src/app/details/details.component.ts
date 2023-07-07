@@ -20,21 +20,17 @@ export class DetailsComponent implements OnInit {
   newUrl!: any;
 
   ngOnInit(): void {
-    this.idBookFromService = this.bookService.idDetails;
-    /*     console.log(this.idBookFromService); */
-    this.newUrl = this.bookService.specificBook;
-
-    this.specificBook();
-    /*  console.log('prova result' + this.resultsFromId);
-    console.log('questo è from service' + this.idBookFromService); */
+    this.bookService.specificBook();
   }
 
   specificBook(): void {
-    this.bookService.specificBook(this.idBookFromService).pipe(
+    this.bookService.specificBook().pipe(
       tap({
         next: (data) => {
-          console.log(data.items);
+          /*  console.log(data.items); */
           this.resultsFromId = data.items;
+          console.dir(this.resultsFromId);
+          console.log(this.resultsFromId);
         },
         error: (error) => {
           console.error('An Error occured:', error);

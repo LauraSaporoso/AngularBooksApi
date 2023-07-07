@@ -26,7 +26,8 @@ export class BookServiceService {
     return this.http.get<any>(this.apiUrlBooks, { params });
   }
 
-  specificBook(bookId: string): Observable<any> {
-    return this.http.get<any>(this.apiUrlBook + bookId);
+  specificBook(): Observable<any> {
+    console.log('BOOOOOOK ID ' + this.idDetails);
+    return this.http.get<any>(this.apiUrlBook + this.idDetails);
   }
 }

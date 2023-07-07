@@ -16,7 +16,9 @@ export class SearchBookComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+   
+  }
 
   searchBooks(): void {
     this.bookService
