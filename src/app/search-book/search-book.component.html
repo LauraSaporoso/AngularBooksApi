@@ -14,7 +14,7 @@
       <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
       <!--   <p>{{ book.volumeInfo.description }}</p> -->
       <img [src]="book.volumeInfo.imageLinks.thumbnail" />
-      <button>Dettagli</button>
+      <button [routerLink]="['/details']">Dettagli</button>
     </div>
   </div>
 </div>
