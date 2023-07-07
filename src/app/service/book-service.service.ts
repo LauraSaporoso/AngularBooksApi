@@ -6,8 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class BookServiceService {
-  private apiUrl = 'https://www.googleapis.com/books/v1/volumes';
+  private apiUrlBooks = 'https://www.googleapis.com/books/v1/volumes';
+  private apiUrlBook = 'https://www.googleapis.com/books/v1/volumes/';
 
+  idDetails!: string;
   constructor(private http: HttpClient) {}
 
   /*
@@ -21,6 +23,10 @@ export class BookServiceService {
       maxResults: '10',
     };
 
-    return this.http.get<any>(this.apiUrl, { params });
+    return this.http.get<any>(this.apiUrlBooks, { params });
+  }
+
+  specificBook(bookId: string): Observable<any> {
+    return this.http.get<any>(this.apiUrlBook + bookId);
   }
 }

@@ -8,13 +8,15 @@ import { Router } from '@angular/router';
   templateUrl: './search-book.component.html',
   styleUrls: ['./search-book.component.css'],
 })
-export class SearchBookComponent {
+export class SearchBookComponent implements OnInit {
   searchResults!: any[];
   searchQuery = 'Harry Potter'; // valore input titolo
   constructor(
     private bookService: BookServiceService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {}
 
   searchBooks(): void {
     this.bookService
@@ -34,8 +36,9 @@ export class SearchBookComponent {
       .subscribe();
   }
 
-  showDetails(titleBook: string) {
-    console.log('Id selezionato uguale a ' + titleBook);
-    this.router.navigateByUrl('/details/' + titleBook);
+  showDetails(idBook: string) {
+    console.log('Id selezionato uguale a ' + idBook);
+    this.router.navigateByUrl('/details/' + idBook);
+    this.bookService.idDetails = idBook;
   }
 }

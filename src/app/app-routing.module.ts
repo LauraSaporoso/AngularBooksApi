@@ -18,7 +18,7 @@ const routes: Routes = [
     component: FavoriteComponent,
   },
   {
-    path: 'details/:titleBook',
+    path: 'details/:idBook',
     component: DetailsComponent,
   },
   {
