@@ -17,7 +17,7 @@ export class SearchBookComponent {
       .searchBooks(this.searchQuery) // passo valore titolo per ottenere url giusto nel service
       .pipe(
         tap({
-          // prendo dati che eìmetto nel mio array searchResults
+          // next riceve i dati emessi dall'observable e li mette in data
           next: (data) => {
             console.log(data.items);
             this.searchResults = data.items;
