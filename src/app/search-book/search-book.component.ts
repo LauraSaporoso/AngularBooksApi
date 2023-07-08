@@ -38,11 +38,8 @@ export class SearchBookComponent implements OnInit {
 
   searchBooks(): void {
     const searchTerm = this.myControl.value;
-    if (!searchTerm) {
-      return; // Do not perform search if the search term is empty
-    }
     this.bookService
-      .searchBooks(searchTerm.title) // passo valore titolo per ottenere url giusto nel service
+      .searchBooks(searchTerm.title ?? searchTerm) // passo valore titolo per ottenere url giusto nel service
       .pipe(
         tap({
           // next riceve i dati emessi dall'observable e li mette in data
