@@ -37,3 +37,11 @@
 .mat-tab-group {
   margin-bottom: 48px;
 }
+
+.search-input {
+  width: 400px;
+}
+
+.autocomplete-option {
+  font-size: 13px;
+}

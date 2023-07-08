@@ -1,13 +1,24 @@
 <div class="search-container">
   <h2>Search Results</h2>
-  <mat-form-field>
+  <mat-form-field class="search-input">
     <input
+      class="search-input"
       matInput
       type="text"
-      [(ngModel)]="searchQuery"
+      [formControl]="myControl"
       placeholder="Enter a search term"
       required
+      [matAutocomplete]="auto"
     />
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option
+        class="autocomplete-option"
+        *ngFor="let option of filteredOptions | async"
+        [value]="option"
+      >
+        {{ option.title }}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
 
   <button
@@ -15,17 +26,17 @@
     mat-raised-button
     color="primary"
     (click)="searchBooks()"
-    [disabled]="!searchQuery"
+    [disabled]="!myControl"
   >
     Search
   </button>
   <div class="book-list">
     <div class="book" *ngFor="let book of searchResults">
-      <h3>{{ book.volumeInfo.title }}</h3>
+      <h3>{{ book?.volumeInfo.title }}</h3>
 
-      <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
+      <p>{{ book?.volumeInfo.authors?.join(", ") }}</p>
       <!--   <p>{{ book.volumeInfo.description }}</p> -->
-      <img [src]="book.volumeInfo.imageLinks.thumbnail" />
+      <img [src]="book?.volumeInfo.imageLinks?.thumbnail" />
       <button mat-raised-button (click)="showDetails(book.id)">Dettagli</button>
     </div>
   </div>
