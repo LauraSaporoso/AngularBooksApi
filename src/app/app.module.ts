@@ -10,9 +10,15 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailsComponent } from './details/details.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, SearchBookComponent, FavoriteComponent, DetailsComponent],
+  declarations: [
+    AppComponent,
+    SearchBookComponent,
+    FavoriteComponent,
+    DetailsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,6 +26,7 @@ import { DetailsComponent } from './details/details.component';
     MaterialModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
