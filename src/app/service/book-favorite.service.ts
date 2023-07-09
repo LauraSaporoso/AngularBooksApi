@@ -6,9 +6,21 @@ import { Book } from '../model/book.model';
   providedIn: 'root',
 })
 export class FavoriteBookService {
+  private storageKey = 'favoriteBooks';
+
   favouriteBooks: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
   favouriteBooks$ = this.favouriteBooks.asObservable();
-  constructor() {}
+  constructor() {
+    this.loadFavoriteBooks();
+  }
+
+  private loadFavoriteBooks() {
+    const savedFavoriteBooks = localStorage.getItem(this.storageKey);
+    if (savedFavoriteBooks) {
+      const favoriteBooks = JSON.parse(savedFavoriteBooks) as Book[];
+      this.favouriteBooks.next(favoriteBooks);
+    }
+  }
 
   AddFavoriteBook(book: any) {
     const retrieveFavoriteBooks = this.favouriteBooks.value;
@@ -28,6 +40,7 @@ export class FavoriteBookService {
     if (!existingBook) {
       retrieveFavoriteBooks.push(newFavoriteBook);
       this.favouriteBooks.next(retrieveFavoriteBooks);
+      this.saveFavoriteBooksLocally(retrieveFavoriteBooks);
       console.log(this.favouriteBooks$);
     } else {
       console.log('The book already exists in the favorite books list.');
@@ -41,5 +54,11 @@ export class FavoriteBookService {
     );
 
     this.favouriteBooks.next(updatedFavoriteBooks);
+
+    this.saveFavoriteBooksLocally(updatedFavoriteBooks);
+  }
+
+  private saveFavoriteBooksLocally(books: Book[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(books));
   }
 }
