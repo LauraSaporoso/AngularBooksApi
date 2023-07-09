@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BookServiceService } from '../service/book-service.service';
+import { BookService } from '../service/book.service';
 import {
   Observable,
   debounceTime,
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { Book, BookAutoComplete } from '../model/book.model';
+import { FavoriteBookService } from '../service/book-favorite.service';
 
 @Component({
   selector: 'app-search-book',
@@ -24,7 +25,8 @@ export class SearchBookComponent implements OnInit {
   filteredOptions!: Observable<BookAutoComplete[]>;
 
   constructor(
-    private bookService: BookServiceService,
+    private bookService: BookService,
+    private favoriteBookService: FavoriteBookService,
     private router: Router,
     private http: HttpClient
   ) {
@@ -45,7 +47,7 @@ export class SearchBookComponent implements OnInit {
           // next riceve i dati emessi dall'observable e li mette in data
           next: (data) => {
             console.log(data.items);
-            this.searchResults = data.items;
+            this.bookService.updateSearchResults$(data.items);
           },
           error: (error) => {
             console.error('An error occurred:', error);
@@ -53,12 +55,22 @@ export class SearchBookComponent implements OnInit {
         })
       )
       .subscribe();
+
+    this.myControl.reset();
+  }
+
+  get searchResults$() {
+    return this.bookService.searchResults$;
   }
 
   showDetails(idBook: string) {
     console.log('Id selezionato uguale a ' + idBook);
     this.router.navigateByUrl('/details/' + idBook);
     this.bookService.idDetails = idBook;
+  }
+
+  addToFavoriteBooks(book: any) {
+    this.favoriteBookService.AddFavoriteBook(book);
   }
 
   displayFn(book: Book): string {

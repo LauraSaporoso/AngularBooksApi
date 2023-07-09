@@ -1,1 +1,8 @@
-<p>favorite works!</p>
+<ul>
+  <li *ngFor="let book of favBooks$ | async">
+    {{ book.title }} - {{ book.author }}
+    <button mat-icon-button color="warn" (click)="removeBook(book)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </li>
+</ul>
