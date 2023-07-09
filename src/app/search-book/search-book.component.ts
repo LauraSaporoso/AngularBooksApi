@@ -19,7 +19,7 @@ import { FavoriteBookService } from '../service/book-favorite.service';
   templateUrl: './search-book.component.html',
   styleUrls: ['./search-book.component.css'],
 })
-export class SearchBookComponent implements OnInit {
+export class SearchBookComponent {
   myControl = new FormControl();
   filteredOptions!: Observable<BookAutoComplete[]>;
 
@@ -29,14 +29,44 @@ export class SearchBookComponent implements OnInit {
     private router: Router,
     private http: HttpClient
   ) {
+    //Ogni volta che il myControl input cambia viene effettuato un suggerimento tramite _filter
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value: string) => (value ? this._filter(value) : []))
     );
   }
 
-  ngOnInit(): void {}
+  //Chiamata http dei suggerimenti
+  private _filter(value: string): BookAutoComplete[] {
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${value}`;
+    const books: BookAutoComplete[] = [];
+    this.http
+      .get(apiUrl)
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((response: any) => {
+        if (response && response.items) {
+          response.items.forEach((item: any) => {
+            const book: BookAutoComplete = {
+              title: item.volumeInfo.title,
+              // Add other properties as needed
+            };
+            books.push(book);
+          });
+        }
+      });
+    return books;
+  }
 
+  get searchResults$() {
+    return this.bookService.searchResults$;
+  }
+
+  //metodo usato per mostrare a schermo il suggerimento dei libri
+  displayFn(book: Book): string {
+    return book && book.title ? book.title : '';
+  }
+
+  //Trova i libri in base al valore dell'input my control
   searchBooks(): void {
     const searchTerm = this.myControl.value;
     this.bookService
@@ -58,41 +88,15 @@ export class SearchBookComponent implements OnInit {
     this.myControl.reset();
   }
 
-  get searchResults$() {
-    return this.bookService.searchResults$;
-  }
-
+  //Mostra il dettaglio
   showDetails(idBook: string) {
     console.log('Id selezionato uguale a ' + idBook);
     this.router.navigateByUrl('/details/' + idBook);
     this.bookService.idDetails = idBook;
   }
 
+  //Aggiunge il libro alla lista dei preferiti del service
   addToFavoriteBooks(book: any) {
     this.favoriteBookService.AddFavoriteBook(book);
-  }
-
-  displayFn(book: Book): string {
-    return book && book.title ? book.title : '';
-  }
-
-  private _filter(value: string): BookAutoComplete[] {
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${value}`;
-    const books: BookAutoComplete[] = [];
-    this.http
-      .get(apiUrl)
-      .pipe(debounceTime(300), distinctUntilChanged())
-      .subscribe((response: any) => {
-        if (response && response.items) {
-          response.items.forEach((item: any) => {
-            const book: BookAutoComplete = {
-              title: item.volumeInfo.title,
-              // Add other properties as needed
-            };
-            books.push(book);
-          });
-        }
-      });
-    return books;
   }
 }

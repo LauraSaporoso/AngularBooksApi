@@ -6,6 +6,7 @@ import { Book } from '../model/book.model';
   providedIn: 'root',
 })
 export class FavoriteBookService {
+  //Creo uno spazio nello storage
   private storageKey = 'favoriteBooks';
 
   favouriteBooks: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
@@ -14,6 +15,7 @@ export class FavoriteBookService {
     this.loadFavoriteBooks();
   }
 
+  // Mi consente di recuperare i preferit allocati nello storage
   private loadFavoriteBooks() {
     const savedFavoriteBooks = localStorage.getItem(this.storageKey);
     if (savedFavoriteBooks) {
@@ -22,6 +24,12 @@ export class FavoriteBookService {
     }
   }
 
+  //Metodo usato nei metodi add e remove favorite book per aggiornare la lista localmente
+  private saveFavoriteBooksLocally(books: Book[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(books));
+  }
+
+  //Metodo add che non fa pushare lo stesso elemento più volte
   AddFavoriteBook(book: any) {
     const retrieveFavoriteBooks = this.favouriteBooks.value;
     const newFavoriteBook: Book = {
@@ -47,6 +55,7 @@ export class FavoriteBookService {
     }
   }
 
+  //Metodo remove
   RemoveFavoriteBook(book: Book) {
     const retrieveFavoriteBooks = this.favouriteBooks.value;
     const updatedFavoriteBooks = retrieveFavoriteBooks.filter(
@@ -56,9 +65,5 @@ export class FavoriteBookService {
     this.favouriteBooks.next(updatedFavoriteBooks);
 
     this.saveFavoriteBooksLocally(updatedFavoriteBooks);
-  }
-
-  private saveFavoriteBooksLocally(books: Book[]) {
-    localStorage.setItem(this.storageKey, JSON.stringify(books));
   }
 }

@@ -12,10 +12,12 @@ export class FavoriteComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  //Prendo dal service la lista dei libri preferiti
   get favBooks$() {
     return this.favoriteBookService.favouriteBooks$;
   }
 
+  //Rimuove libro dalla lista dei libri preferiti
   removeBook(book: Book) {
     this.favoriteBookService.RemoveFavoriteBook(book);
   }
