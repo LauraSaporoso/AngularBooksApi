@@ -37,9 +37,10 @@
       <p>{{ book?.volumeInfo.authors?.join(", ") }}</p>
       <!--   <p>{{ book.volumeInfo.description }}</p> -->
       <img [src]="book?.volumeInfo.imageLinks?.thumbnail" />
-      <button mat-raised-button (click)="showDetails(book.id)">Dettagli</button>
+
+      <button mat-raised-button (click)="showDetails(book.id)">Details</button>
       <button mat-raised-button (click)="addToFavoriteBooks(book)">
-        Aggiungi ai preferiti
+        Add to favorite
       </button>
     </div>
   </div>
