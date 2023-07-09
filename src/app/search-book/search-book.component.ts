@@ -20,7 +20,6 @@ import { FavoriteBookService } from '../service/book-favorite.service';
   styleUrls: ['./search-book.component.css'],
 })
 export class SearchBookComponent implements OnInit {
-  searchResults!: any[];
   myControl = new FormControl();
   filteredOptions!: Observable<BookAutoComplete[]>;
 
