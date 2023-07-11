@@ -10,6 +10,15 @@
       required
       [matAutocomplete]="auto"
     />
+    <button
+      *ngIf="myControl.value != undefined"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="myControl.reset()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
       <mat-option
         class="autocomplete-option"

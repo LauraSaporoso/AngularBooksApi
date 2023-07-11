@@ -52,6 +52,7 @@ export class FavoriteBookService {
       console.log(this.favouriteBooks$);
     } else {
       console.log('The book already exists in the favorite books list.');
+      alert('The book already exists in the favorite books list.');
     }
   }
 

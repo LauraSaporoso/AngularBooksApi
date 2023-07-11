@@ -84,8 +84,6 @@ export class SearchBookComponent {
         })
       )
       .subscribe();
-
-    this.myControl.reset();
   }
 
   //Mostra il dettaglio
