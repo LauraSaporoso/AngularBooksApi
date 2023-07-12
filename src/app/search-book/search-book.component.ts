@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Book, BookAutoComplete } from '../model/book.model';
 import { HttpClient } from '@angular/common/http';
+import { BookFavoriteService } from '../service/book-favorite.service';
 
 @Component({
   selector: 'app-search-book',
@@ -26,7 +27,8 @@ export class SearchBookComponent implements OnInit {
   constructor(
     private bookService: BookServiceService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private favoriteBookService: BookFavoriteService
   ) {
     // valueChanges fa parte del modulo ReactiveFormsModule ed è utilizzato per monitorare i cambiamenti del valore di un FormControl.
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -41,15 +43,15 @@ export class SearchBookComponent implements OnInit {
   ngOnInit(): void {}
 
   searchBooks(): void {
-    const inputTerm = this.myControl.value;
+    const searchTerm = this.myControl.value;
     this.bookService
-      .searchBooks(inputTerm.title ?? inputTerm) // passo valore titolo per ottenere url giusto nel service
+      .searchBooks(searchTerm.title ?? searchTerm) // passo valore titolo per ottenere url giusto nel service
       .pipe(
         tap({
           // next riceve i dati emessi dall'observable e li mette in data
           next: (data) => {
             console.log(data.items);
-            this.searchResults = data.items;
+            this.bookService.updateSearchResults$(data.items);
           },
           error: (error) => {
             console.error('An error occurred:', error);
@@ -103,5 +105,14 @@ export class SearchBookComponent implements OnInit {
         }
       });
     return books;
+  }
+
+  get searchResults$() {
+    return this.bookService.searchResults$;
+  }
+
+  //Aggiunge il libro alla lista dei preferiti del service
+  addToFavoriteBooks(book: any) {
+    this.favoriteBookService.AddFavoriteBook(book);
   }
 }

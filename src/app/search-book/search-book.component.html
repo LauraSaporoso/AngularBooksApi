@@ -36,13 +36,16 @@
 
   <!-- Book List -->
   <div class="book-list">
-    <div class="book" *ngFor="let book of searchResults">
+    <div class="book" *ngFor="let book of searchResults$ | async">
       <h3>{{ book?.volumeInfo.title }}</h3>
 
       <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
       <!--   <p>{{ book.volumeInfo.description }}</p> -->
       <img [src]="book?.volumeInfo.imageLinks?.thumbnail" />
       <button mat-raised-button (click)="showDetails(book.id)">Dettagli</button>
+      <button mat-raised-button (click)="addToFavoriteBooks(book)">
+        Add to favorite
+      </button>
     </div>
   </div>
 </div>

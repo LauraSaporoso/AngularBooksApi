@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FavoriteBookService } from '../service/book-favorite.service';
+import { BookFavoriteService } from '../service/book-favorite.service';
 import { Book } from '../model/book.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { Book } from '../model/book.model';
   styleUrls: ['./favorite.component.css'],
 })
 export class FavoriteComponent implements OnInit {
-  constructor(private favoriteBookService: FavoriteBookService) {}
+  constructor(private favoriteBookService: BookFavoriteService) {}
 
   ngOnInit(): void {}
 

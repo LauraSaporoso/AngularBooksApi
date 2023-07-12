@@ -3,5 +3,11 @@
     ><router-outlet></router-outlet
   ></mat-tab>
 
-  <mat-tab label="My Favorites"><app-favorite></app-favorite></mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label="My Favorites">
+      <span matBadge="{{ (favBooks$ | async)?.length }}" matBadgeOverlap="false"
+        >My Favorites</span
+      > </ng-template
+    ><app-favorite></app-favorite
+  ></mat-tab>
 </mat-tab-group>

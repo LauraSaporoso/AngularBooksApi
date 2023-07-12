@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,10 @@ export class BookServiceService {
   private apiUrlBook = 'https://www.googleapis.com/books/v1/volumes/';
 
   idDetails!: string;
+  private searchResults: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
+    []
+  );
+  searchResults$ = this.searchResults.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +33,8 @@ export class BookServiceService {
       map((response) => {
         // con filter ritorno solo libri con imageLinks.thumbnail
         const filteredItems = response.items.filter(
-          (item: any) => item.volumeInfo.imageLinks.thumbnail
+          (item: any) =>
+            item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail
         );
         response.item = filteredItems;
         return response;
@@ -40,5 +45,10 @@ export class BookServiceService {
   // chiamata http di 1 solo oggetto
   specificBook(): Observable<any> {
     return this.http.get<any>(this.apiUrlBook + this.idDetails);
+  }
+
+  // aggiorna la lista dei risultati 
+  updateSearchResults$(results: any[]) {
+    this.searchResults.next(results);
   }
 }
