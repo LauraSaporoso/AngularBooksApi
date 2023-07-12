@@ -36,7 +36,7 @@ export class BookServiceService {
           (item: any) =>
             item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail
         );
-        response.item = filteredItems;
+        response.items = filteredItems;
         return response;
       })
     );
@@ -47,7 +47,7 @@ export class BookServiceService {
     return this.http.get<any>(this.apiUrlBook + this.idDetails);
   }
 
-  // aggiorna la lista dei risultati 
+  // aggiorna la lista dei risultati
   updateSearchResults$(results: any[]) {
     this.searchResults.next(results);
   }
