@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,17 @@ export class BookServiceService {
       q: query,
       maxResults: '10',
     };
-    return this.http.get<any>(this.apiUrlBooks, { params });
+    return this.http.get<any>(this.apiUrlBooks, { params }).pipe(
+      // voglio far vedere solo libri che HANNO l'img di copertina
+      map((response) => {
+        // con filter ritorno solo libri con imageLinks.thumbnail
+        const filteredItems = response.items.filter(
+          (item: any) => item.volumeInfo.imageLinks.thumbnail
+        );
+        response.item = filteredItems;
+        return response;
+      })
+    );
   }
 
   // chiamata http di 1 solo oggetto
