@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { BookServiceService } from '../service/book-service.service';
-import { Observable, tap } from 'rxjs';
+import { BookService } from '../service/book.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-details',
@@ -9,10 +9,7 @@ import { Observable, tap } from 'rxjs';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent implements OnInit {
-  constructor(
-    private location: Location,
-    private bookService: BookServiceService
-  ) {}
+  constructor(private location: Location, private bookService: BookService) {}
 
   idBookFromService!: string;
   resultsFromId!: any;

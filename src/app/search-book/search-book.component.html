@@ -1,8 +1,8 @@
-<!-- Input search -->
 <div class="search-container">
   <h2>Search Results</h2>
-  <mat-form-field>
+  <mat-form-field class="search-input">
     <input
+      class="search-input"
       matInput
       type="text"
       [formControl]="myControl"
@@ -10,9 +10,16 @@
       required
       [matAutocomplete]="auto"
     />
-    <!-- [displayWith] viene utilizzato per personalizzare la visualizzazione dei dati all'interno di un menu a discesa mat-select. Questo
-      attributo accetta una funzione che definisce come i dati devono essere visualizzati nel menu a discesa. -->
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayTitle">
+    <button
+      *ngIf="myControl.value != undefined"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="myControl.reset()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
       <mat-option
         class="autocomplete-option"
         *ngFor="let option of filteredOptions | async"
@@ -23,31 +30,31 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <!-- Button search -->
   <button
     class="button-search"
     mat-raised-button
     color="primary"
     (click)="searchBooks()"
-    [disabled]="!myControl.value"
+    [disabled]="!myControl"
   >
     Search
   </button>
-
-  <!-- Book List -->
   <div class="book-list">
-    <div class="book" *ngFor="let book of searchResults">
+    <div class="book" *ngFor="let book of searchResults$ | async">
       <h3>{{ book?.volumeInfo.title }}</h3>
 
-      <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
+      <p>{{ book?.volumeInfo.authors?.join(", ") }}</p>
       <!--   <p>{{ book.volumeInfo.description }}</p> -->
       <img [src]="book?.volumeInfo.imageLinks?.thumbnail" />
-      <button mat-raised-button (click)="showDetails(book.id)">Dettagli</button>
+
+      <button mat-raised-button (click)="showDetails(book.id)">Details</button>
+      <button mat-raised-button (click)="addToFavoriteBooks(book)">
+        Add to favorite
+      </button>
     </div>
   </div>
 </div>
 
 <!-- book.volumeInfo.authors?.join(", ")
-   L'operatore ? viene utilizzato per verificare se l'array authors esiste e non è nullo prima di eseguire il join(). Jois serve per combinare gli
-   elementi dell'array degli autori in una singola stringa separata da virgole per visualizzare correttamente gli autori nel formato desiderato.
+   L'operatore ? viene utilizzato per verificare se l'array authors esiste e non è nullo prima di eseguire il join(). Jois serve per combinare gli elementi dell'array degli autori in una singola stringa separata da virgole per visualizzare correttamente gli autori nel formato desiderato.
 -->

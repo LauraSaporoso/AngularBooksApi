@@ -4,6 +4,7 @@ export interface Book {
   thumbnailUrl?: string;
   description?: string;
 }
+
 export interface BookAutoComplete {
   title: string;
 }
