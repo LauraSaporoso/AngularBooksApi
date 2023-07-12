@@ -56,7 +56,7 @@ export class BookFavoriteService {
     }
   }
 
-  //Metodo remove
+  //Metodo remove book
   RemoveFavoriteBook(book: Book) {
     const retrieveFavoriteBooks = this.favouriteBooks.value;
     const updatedFavoriteBooks = retrieveFavoriteBooks.filter(
