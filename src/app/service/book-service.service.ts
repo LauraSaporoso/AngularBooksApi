@@ -7,7 +7,6 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 })
 export class BookServiceService {
   private apiUrlBooks = 'https://www.googleapis.com/books/v1/volumes';
-  private apiUrlBook = 'https://www.googleapis.com/books/v1/volumes/';
 
   idDetails!: string;
   private searchResults: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
@@ -44,11 +43,17 @@ export class BookServiceService {
 
   // chiamata http di 1 solo oggetto
   specificBook(): Observable<any> {
-    return this.http.get<any>(this.apiUrlBook + this.idDetails);
+    return this.http.get<any>(this.apiUrlBooks + `/${this.idDetails}`);
   }
 
   // aggiorna la lista dei risultati
   updateSearchResults$(results: any[]) {
     this.searchResults.next(results);
+  }
+
+  removeTags(htmlString: string): string {
+    const div = document.createElement('div');
+    div.innerHTML = htmlString;
+    return div.innerText;
   }
 }

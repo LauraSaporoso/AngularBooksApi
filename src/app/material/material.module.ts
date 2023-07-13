@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   imports: [
@@ -14,6 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatAutocompleteModule,
     MatBadgeModule,
     MatIconModule,
+    MatExpansionModule,
+    MatCardModule,
   ],
   exports: [
     MatTabsModule,
@@ -22,6 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatAutocompleteModule,
     MatBadgeModule,
     MatIconModule,
+    MatExpansionModule,
+    MatCardModule,
   ],
 })
 export class MaterialModule {}

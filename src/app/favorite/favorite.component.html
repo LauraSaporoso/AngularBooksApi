@@ -1,9 +1,29 @@
-
-<ul>
+<!-- <ul>
   <li *ngFor="let book of favBooks$ | async">
     {{ book.title }} - {{ book.author }}
     <button mat-icon-button color="warn" (click)="removeBook(book)">
       <mat-icon>delete</mat-icon>
     </button>
   </li>
-</ul>
+</ul> -->
+
+<mat-accordion *ngFor="let book of favBooks$ | async">
+  <mat-expansion-panel
+    class="exp-panel"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{ book.title }} - {{ book.author }} </mat-panel-title>
+      <mat-panel-description> </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-card class="card-book">
+      <img [src]="book.thumbnailUrl" />
+      <mat-card-content> {{ removeTags(book.description) }} </mat-card-content>
+      <button mat-icon-button (click)="removeBook(book)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>

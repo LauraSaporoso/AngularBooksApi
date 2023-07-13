@@ -29,8 +29,8 @@ export class DetailsComponent implements OnInit {
       .pipe(
         tap({
           next: (data) => {
-            console.log(data);
             this.resultsFromId = data;
+            console.log(this.resultsFromId);
           },
           error: (error) => {
             console.error('An Error occured:', error);
@@ -42,5 +42,9 @@ export class DetailsComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  removeTags(htmlString: string): string {
+    return this.bookService.removeTags(htmlString);
   }
 }

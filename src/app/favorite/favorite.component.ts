@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookFavoriteService } from '../service/book-favorite.service';
 import { Book } from '../model/book.model';
+import { BookServiceService } from '../service/book-service.service';
 
 @Component({
   selector: 'app-favorite',
@@ -8,7 +9,11 @@ import { Book } from '../model/book.model';
   styleUrls: ['./favorite.component.css'],
 })
 export class FavoriteComponent implements OnInit {
-  constructor(private favoriteBookService: BookFavoriteService) {}
+  panelOpenState = false;
+  constructor(
+    private favoriteBookService: BookFavoriteService,
+    private bookService: BookServiceService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -20,5 +25,9 @@ export class FavoriteComponent implements OnInit {
   //Rimuove libro dalla lista dei libri preferiti
   removeBook(book: Book) {
     this.favoriteBookService.RemoveFavoriteBook(book);
+  }
+
+  removeTags(htmlString: string): string {
+    return this.bookService.removeTags(htmlString);
   }
 }

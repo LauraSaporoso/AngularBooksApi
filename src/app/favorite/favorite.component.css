@@ -1,0 +1,7 @@
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin: 0 100px;
+}
+
+.exp-panel {
+  display: inline;
+}

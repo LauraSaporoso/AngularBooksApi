@@ -113,6 +113,6 @@ export class SearchBookComponent implements OnInit {
 
   //Aggiunge il libro alla lista dei preferiti del service
   addToFavoriteBooks(book: any) {
-    this.favoriteBookService.AddFavoriteBook(book);
+    this.favoriteBookService.addFavoriteBook(book);
   }
 }

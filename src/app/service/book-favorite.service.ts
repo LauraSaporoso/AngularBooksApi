@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Book } from '../model/book.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +9,11 @@ import { BehaviorSubject } from 'rxjs';
 export class BookFavoriteService {
   //Creo uno spazio nello storage
   private storageKey = 'favoriteBooks';
+  private apiUrlBooks = 'https://www.googleapis.com/books/v1/volumes/';
 
   favouriteBooks: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
   favouriteBooks$ = this.favouriteBooks.asObservable();
-  constructor() {
+  constructor(private http: HttpClient) {
     this.loadFavoriteBooks();
   }
 
@@ -29,31 +31,47 @@ export class BookFavoriteService {
     localStorage.setItem(this.storageKey, JSON.stringify(books));
   }
 
-  //Metodo add che non fa pushare lo stesso elemento più volte
-  AddFavoriteBook(book: any) {
-    const retrieveFavoriteBooks = this.favouriteBooks.value;
-    const newFavoriteBook: Book = {
-      title: book.volumeInfo.title,
-      author: book.volumeInfo.authors,
-      thumbnailUrl: book.volumeInfo.thumbnail,
-      description: book.volumeInfo.description,
-    };
+  addFavoriteBook(book: any) {
+    console.log(book.id);
+    this.http
+      .get<any>(this.apiUrlBooks + book.id)
+      .pipe(
+        tap((newBook: any) => {
+          console.log(newBook);
+          const newFavoriteBook = {
+            title: newBook.volumeInfo.title,
+            author: newBook.volumeInfo.authors,
+            thumbnailUrl: newBook.volumeInfo.imageLinks.thumbnail,
+            description: newBook.volumeInfo.description,
+          };
 
-    // Check if the book already exists in the favorite books list
-    const existingBook = retrieveFavoriteBooks.find(
-      (b) =>
-        b.title === newFavoriteBook.title && b.author === newFavoriteBook.author
-    );
+          const retrieveFavoriteBooks = this.favouriteBooks.value;
+          // Check if the book already exists in the favorite books list
+          const existingBook = retrieveFavoriteBooks.find(
+            (b) =>
+              b.title === newFavoriteBook.title &&
+              JSON.stringify(b.author) ===
+                JSON.stringify(newFavoriteBook.author)
+          );
 
-    if (!existingBook) {
-      retrieveFavoriteBooks.push(newFavoriteBook);
-      this.favouriteBooks.next(retrieveFavoriteBooks);
-      this.saveFavoriteBooksLocally(retrieveFavoriteBooks);
-      console.log(this.favouriteBooks$);
-    } else {
-      console.log('The book already exists in the favorite books list.');
-      alert('The book already exists in the favorite books list.');
-    }
+          if (!existingBook) {
+            retrieveFavoriteBooks.push(newFavoriteBook);
+            console.log(newFavoriteBook);
+            this.favouriteBooks.next(retrieveFavoriteBooks);
+            this.saveFavoriteBooksLocally(retrieveFavoriteBooks);
+            console.log(this.favouriteBooks.getValue());
+          } else {
+            console.log('The book already exists in the favorite books list.');
+            alert('The book already exists in the favorite books list.');
+          }
+        }),
+        tap({
+          error: (error) => {
+            console.error('An error occurred:', error);
+          },
+        })
+      )
+      .subscribe();
   }
 
   //Metodo remove book
