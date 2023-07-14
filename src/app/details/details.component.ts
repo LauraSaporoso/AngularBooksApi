@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { BookServiceService } from '../service/book-service.service';
 import { Observable, tap } from 'rxjs';
+import { FavoriteComponent } from '../favorite/favorite.component';
+import { BookFavoriteService } from '../service/book-favorite.service';
 
 @Component({
   selector: 'app-details',
@@ -11,7 +13,8 @@ import { Observable, tap } from 'rxjs';
 export class DetailsComponent implements OnInit {
   constructor(
     private location: Location,
-    private bookService: BookServiceService
+    private bookService: BookServiceService,
+    private favoriteBookService: BookFavoriteService
   ) {}
 
   idBookFromService!: string;
@@ -46,5 +49,9 @@ export class DetailsComponent implements OnInit {
 
   removeTags(htmlString: string): string {
     return this.bookService.removeTags(htmlString);
+  }
+
+  addFavorite() {
+    this.favoriteBookService.addFavoriteBook(this.resultsFromId);
   }
 }
