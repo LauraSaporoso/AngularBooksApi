@@ -33,7 +33,9 @@ export class BookServiceService {
         // con filter ritorno solo libri con imageLinks.thumbnail
         const filteredItems = response.items.filter(
           (item: any) =>
-            item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail
+            item.volumeInfo.imageLinks &&
+            item.volumeInfo.imageLinks.thumbnail &&
+            item.volumeInfo.description
         );
         response.items = filteredItems;
         return response;
