@@ -44,23 +44,40 @@
     Search
   </button>
 
-  <!-- Book List -->
-  <div class="book-list">
-    <div class="book" *ngFor="let book of searchResults$ | async">
-      <h3>{{ book?.volumeInfo.title }}</h3>
+  <ng-template
+    *ngIf="
+      myControl.dirty || myControl.touched;
+      then listContainer;
+      else messageContainer
+    "
+  >
+  </ng-template>
 
-      <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
-      <!--   <p>{{ book.volumeInfo.description }}</p> -->
-      <img [src]="book?.volumeInfo.imageLinks?.thumbnail" />
-      <button mat-raised-button (click)="showDetails(book.id)">Dettagli</button>
-      <button mat-raised-button (click)="addToFavoriteBooks(book)">
-        Add to favorite
-      </button>
+  <ng-template #messageContainer
+    >Web App per ricercare libri tramite titolo</ng-template
+  >
+
+  <ng-template #listContainer>
+    <!-- Book List -->
+    <div class="book-list">
+      <div class="book" *ngFor="let book of searchResults$ | async">
+        <h3>{{ book?.volumeInfo.title }}</h3>
+
+        <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
+        <!--   <p>{{ book.volumeInfo.description }}</p> -->
+        <img [src]="book?.volumeInfo.imageLinks?.thumbnail" />
+        <button mat-raised-button (click)="showDetails(book.id)">
+          Dettagli
+        </button>
+        <button mat-raised-button (click)="addToFavoriteBooks(book)">
+          Add to favorite
+        </button>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- book.volumeInfo.authors?.join(", ")
+    <!-- book.volumeInfo.authors?.join(", ")
    L'operatore ? viene utilizzato per verificare se l'array authors esiste e non è nullo prima di eseguire il join(). Jois serve per combinare gli
    elementi dell'array degli autori in una singola stringa separata da virgole per visualizzare correttamente gli autori nel formato desiderato.
 -->
+  </ng-template>
+</div>
