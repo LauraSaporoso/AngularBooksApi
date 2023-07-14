@@ -61,6 +61,13 @@ export class SearchBookComponent implements OnInit {
       .subscribe();
   }
 
+  // button search funziona con Invio da tastiera
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.searchBooks();
+    }
+  }
+
   /*
   displayTitle() La logica all'interno del metodo controlla se l'oggetto book è valido e se ha una proprietà title definita. Se entrambe le condizioni sono vere, viene restituito il valore della proprietà title del libro come stringa.
 

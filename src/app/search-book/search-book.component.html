@@ -6,6 +6,7 @@
       class="search-input"
       matInput
       type="text"
+      (keydown)="onKeyDown($event)"
       [formControl]="myControl"
       placeholder="Enter a search term"
       required
