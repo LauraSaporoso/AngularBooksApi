@@ -38,3 +38,16 @@
 .mat-tab-group {
   margin-bottom: 48px;
 }
+
+.mat-card {
+  margin-top: 20px;
+  margin-inline: 20px;
+  line-height: 25px;
+  background-color: aliceblue;
+}
+
+.mat-card-content {
+  padding: 5px 20px;
+  color: rgb(91, 91, 91);
+  letter-spacing: 0.5px;
+}
