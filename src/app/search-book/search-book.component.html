@@ -3,6 +3,7 @@
   <h2>Search Results</h2>
   <mat-form-field>
     <input
+      class="search-input"
       matInput
       type="text"
       [formControl]="myControl"
@@ -10,6 +11,14 @@
       required
       [matAutocomplete]="auto"
     />
+    <button
+      *ngIf="myControl.value"
+      matSuffix
+      mat-icon-button
+      (click)="myControl.reset()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
     <!-- [displayWith] viene utilizzato per personalizzare la visualizzazione dei dati all'interno di un menu a discesa mat-select. Questo
       attributo accetta una funzione che definisce come i dati devono essere visualizzati nel menu a discesa. -->
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayTitle">

@@ -1,13 +1,4 @@
-<!-- <ul>
-  <li *ngFor="let book of favBooks$ | async">
-    {{ book.title }} - {{ book.author }}
-    <button mat-icon-button color="warn" (click)="removeBook(book)">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </li>
-</ul> -->
-
-<mat-accordion *ngFor="let book of favBooks$ | async">
+<!-- <mat-accordion *ngFor="let book of favBooks$ | async">
   <mat-expansion-panel
     class="exp-panel"
     (opened)="panelOpenState = true"
@@ -25,5 +16,34 @@
         <mat-icon>delete</mat-icon>
       </button>
     </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>
+ -->
+<mat-accordion class="panel-group">
+  <mat-expansion-panel *ngFor="let book of favBooks$ | async">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <p>
+          <strong>{{ book.title }}</strong>
+          <span class="author-name"> {{ book.author }}</span>
+        </p>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-card class="card-content">
+      <div class="thumbnail">
+        <img [src]="book.thumbnailUrl" />
+      </div>
+      <div class="description">
+        <mat-card-content>
+          {{ removeTags(book.description) }}
+        </mat-card-content>
+      </div>
+    </mat-card>
+    <div class="delete-button">
+      <button mat-raised-button color="warn" (click)="removeBook(book)">
+        Remove from list
+      </button>
+    </div>
   </mat-expansion-panel>
 </mat-accordion>
