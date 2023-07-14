@@ -1,4 +1,9 @@
 .mat-tab-group {
   align-items: center;
-  margin-top: 20px;
+  margin: 10px;
+}
+
+.fav-tab {
+  overflow: hidden;
+  margin: 0 30px;
 }

@@ -7,6 +7,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatExpansionModule,
     MatCardModule,
+    MatDividerModule,
   ],
   exports: [
     MatTabsModule,
@@ -28,6 +30,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatExpansionModule,
     MatCardModule,
+    MatDividerModule,
   ],
 })
 export class MaterialModule {}

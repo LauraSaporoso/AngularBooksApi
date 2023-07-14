@@ -1,7 +1,46 @@
-.mat-mdc-form-field + .mat-mdc-form-field {
-  margin: 0 100px;
+.panel-group {
+  margin: 0 20px;
 }
 
-.exp-panel {
-  display: inline;
+.card-content {
+  display: flex;
+  flex-direction: row;
+  max-width: 800px;
+}
+
+.author-name {
+  font-size: 13px;
+  color: gray;
+}
+
+.thumbnail {
+  flex: 0 0 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.description {
+  flex: 0 0 60%;
+}
+
+.delete-button {
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .card-content {
+    flex-direction: column;
+  }
+
+  .thumbnail,
+  .description {
+    flex: 1;
+    margin-bottom: 10px;
+  }
+
+  .delete-button {
+    margin: 20px 0;
+  }
 }
