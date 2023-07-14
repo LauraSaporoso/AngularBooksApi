@@ -1,5 +1,12 @@
 .panel-group {
-  margin: 0 20px;
+  margin: 30px;
+}
+
+.favorite-container {
+  width: 100%;
+  display: flex;
+
+  justify-content: center;
 }
 
 .card-content {
@@ -10,6 +17,7 @@
 
 .author-name {
   font-size: 13px;
+  margin-left: 10px;
   color: gray;
 }
 

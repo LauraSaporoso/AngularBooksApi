@@ -19,31 +19,34 @@
   </mat-expansion-panel>
 </mat-accordion>
  -->
-<mat-accordion class="panel-group">
-  <mat-expansion-panel *ngFor="let book of favBooks$ | async">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <p>
-          <strong>{{ book.title }}</strong>
-          <span class="author-name"> {{ book.author }}</span>
-        </p>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
 
-    <mat-card class="card-content">
-      <div class="thumbnail">
-        <img [src]="book.thumbnailUrl" />
+<div class="favorite-container">
+  <mat-accordion class="panel-group">
+    <mat-expansion-panel *ngFor="let book of favBooks$ | async">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <p>
+            <strong>{{ book.title }}</strong>
+            <span class="author-name"> {{ book.author }}</span>
+          </p>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-card class="card-content">
+        <div class="thumbnail">
+          <img [src]="book.thumbnailUrl" />
+        </div>
+        <div class="description">
+          <mat-card-content>
+            {{ removeTags(book.description) }}
+          </mat-card-content>
+        </div>
+      </mat-card>
+      <div class="delete-button">
+        <button mat-raised-button color="warn" (click)="removeBook(book)">
+          Remove from list
+        </button>
       </div>
-      <div class="description">
-        <mat-card-content>
-          {{ removeTags(book.description) }}
-        </mat-card-content>
-      </div>
-    </mat-card>
-    <div class="delete-button">
-      <button mat-raised-button color="warn" (click)="removeBook(book)">
-        Remove from list
-      </button>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
