@@ -1,16 +1,42 @@
-<mat-tab-group animationDuration="0ms">
-  <mat-tab label="Search" routerLink="/home"
-    ><router-outlet></router-outlet
-  ></mat-tab>
+<!-- <mat-tab-group animationDuration="0ms">
+  <mat-tab>
+    <a routerLink="/home">
+      <ng-template mat-tab-label="Search">
+        <span>Search</span>
+      </ng-template>
+    </a>
+  </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label="My Favorites">
-      <span matBadge="{{ (favBooks$ | async)?.length }}" matBadgeOverlap="false"
-        >My Favorites</span
-      >
+      <a routerLink="/favorite">
+        <span
+          matBadge="{{ (favBooks$ | async)?.length }}"
+          matBadgeOverlap="false"
+          >My Favorites</span
+        >
+      </a>
     </ng-template>
-    <div class="fav-tab">
-      <app-favorite></app-favorite>
-    </div>
+
+    <div class="fav-tab"></div>
   </mat-tab>
-</mat-tab-group>
+</mat-tab-group> -->
+<nav>
+  <a
+    routerLink="home"
+    [class.active]="isSearchActive"
+    (click)="setSearchActive(true)"
+    >Search</a
+  >
+
+  <a
+    routerLink="favorite"
+    [class.active]="isFavoriteActive"
+    (click)="setSearchActive(false)"
+    ><span matBadge="{{ (favBooks$ | async)?.length }}" matBadgeOverlap="false"
+      >My Favorites</span
+    ></a
+  >
+</nav>
+
+<router-outlet></router-outlet>

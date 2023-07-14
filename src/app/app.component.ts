@@ -14,4 +14,12 @@ export class AppComponent {
   get favBooks$() {
     return this.favoriteBookService.favouriteBooks$;
   }
+
+  isSearchActive: boolean = true;
+  isFavoriteActive!: boolean;
+
+  setSearchActive(active: boolean) {
+    this.isSearchActive = active;
+    this.isFavoriteActive = !active;
+  }
 }

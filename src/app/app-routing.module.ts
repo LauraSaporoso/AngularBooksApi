@@ -14,6 +14,10 @@ const routes: Routes = [
     component: SearchBookComponent,
   },
   {
+    path: 'favorite',
+    component: FavoriteComponent,
+  },
+  {
     path: 'details/:idBook',
     component: DetailsComponent,
   },
