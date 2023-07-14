@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { BookServiceService } from '../service/book-service.service';
-import { Observable, tap } from 'rxjs';
-import { FavoriteComponent } from '../favorite/favorite.component';
+import { tap } from 'rxjs';
 import { BookFavoriteService } from '../service/book-favorite.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -14,21 +14,24 @@ export class DetailsComponent implements OnInit {
   constructor(
     private location: Location,
     private bookService: BookServiceService,
-    private favoriteBookService: BookFavoriteService
+    private favoriteBookService: BookFavoriteService,
+    private route: ActivatedRoute
   ) {}
 
   idBookFromService!: string;
   resultsFromId!: any;
 
-  newUrl!: any;
-
   ngOnInit(): void {
-    console.log(this.specificBookDetails());
+    this.route.params.subscribe((params) => {
+      const paramValue = params['idBook']; // Replace 'paramName' with the actual parameter name you're expecting
+      this.idBookFromService = paramValue;
+    });
+    console.log(this.specificBookDetails(this.idBookFromService));
   }
 
-  specificBookDetails(): void {
+  specificBookDetails(bookId: string): void {
     this.bookService
-      .specificBook()
+      .specificBook(bookId)
       .pipe(
         tap({
           next: (data) => {

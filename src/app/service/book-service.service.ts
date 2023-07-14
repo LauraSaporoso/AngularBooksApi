@@ -44,8 +44,8 @@ export class BookServiceService {
   }
 
   // chiamata http di 1 solo oggetto
-  specificBook(): Observable<any> {
-    return this.http.get<any>(this.apiUrlBooks + `/${this.idDetails}`);
+  specificBook(bookId: string): Observable<any> {
+    return this.http.get<any>(this.apiUrlBooks + `/${bookId}`);
   }
 
   // aggiorna la lista dei risultati
