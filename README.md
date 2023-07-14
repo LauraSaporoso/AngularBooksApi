@@ -4,7 +4,7 @@
 
 👥 Progetto in team --> stefandayy 🤝
 
-🔥Realizzato usando Typescript, Angular, Angular Material e cat API .
+🔥Realizzato usando Typescript, Angular, Angular Material e Google Book API .
 
 💻 Challenge: 
 - Ricerca di libri tramiche API con input search nella homa nella quale verranno visualizzati suggerimenti ad ogni digitazione.
