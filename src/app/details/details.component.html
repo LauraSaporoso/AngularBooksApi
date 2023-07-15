@@ -4,7 +4,7 @@
 <div class="details">
   <div class="book-details">
     <h3>
-      <strong>{{ resultsFromId?.volumeInfo.title }}</strong>
+      {{ resultsFromId?.volumeInfo.title }}
     </h3>
     <div class="details-container">
       <img [src]="resultsFromId?.volumeInfo.imageLinks.thumbnail" />
@@ -20,5 +20,7 @@
       </div>
     </div>
   </div>
-  <button mat-raised-button (click)="addFavorite()">Add To Favorite</button>
+  <button mat-raised-button class="favorite-button" (click)="addFavorite()">
+    Add To Favorite
+  </button>
 </div>

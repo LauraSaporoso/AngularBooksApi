@@ -2,13 +2,17 @@
   margin: 30px;
 }
 .details {
-  width: 100%;
+  padding: 20px 0px;
+  margin-inline: 20%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: 2px solid rgb(243, 243, 243);
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgb(187, 187, 187);
 }
 .book-details {
-  width: 75%;
+  padding: 20px;
 }
 .details-container {
   display: flex;
@@ -22,6 +26,19 @@
   height: 250px;
 }
 
+.favorite-button:hover {
+  background-color: #3f51b5;
+  color: white;
+}
+
+h3 {
+  font-weight: bold;
+  color: #3f51b5;
+  font-size: 18px;
+}
+p {
+  color: rgb(67, 67, 67);
+}
 @media screen and (max-width: 767px) {
   .details-container {
     flex-direction: column;
