@@ -43,4 +43,7 @@ p {
   .details-container {
     flex-direction: column;
   }
+  .details {
+    margin-inline: 5%;
+  }
 }
