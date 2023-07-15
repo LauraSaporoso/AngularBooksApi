@@ -4,18 +4,18 @@
 <div class="details">
   <div class="book-details">
     <h3>
-      <strong>{{ resultsFromId.volumeInfo.title }}</strong>
+      <strong>{{ resultsFromId?.volumeInfo.title }}</strong>
     </h3>
     <div class="details-container">
       <img [src]="resultsFromId?.volumeInfo.imageLinks.thumbnail" />
       <div class="sub-details-container">
         <p>
           <strong>Author:</strong>
-          {{ resultsFromId.volumeInfo.authors?.join(", ") }}
+          {{ resultsFromId?.volumeInfo.authors?.join(", ") }}
         </p>
         <p>
           <strong>Description</strong>
-          {{ removeTags(resultsFromId.volumeInfo.description) }}
+          {{ removeTags(resultsFromId?.volumeInfo.description) }}
         </p>
       </div>
     </div>

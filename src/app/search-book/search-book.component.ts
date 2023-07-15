@@ -118,6 +118,10 @@ export class SearchBookComponent implements OnInit {
     return this.bookService.searchResults$;
   }
 
+  isEmpty(): boolean {
+    return this.bookService.isEmpty();
+  }
+
   //Aggiunge il libro alla lista dei preferiti del service
   addToFavoriteBooks(book: any) {
     this.favoriteBookService.addFavoriteBook(book);

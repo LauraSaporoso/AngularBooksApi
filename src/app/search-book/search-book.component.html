@@ -44,13 +44,7 @@
     Search
   </button>
 
-  <ng-template
-    *ngIf="
-      myControl.dirty || myControl.touched;
-      then listContainer;
-      else messageContainer
-    "
-  >
+  <ng-template *ngIf="!isEmpty(); then listContainer; else messageContainer">
   </ng-template>
 
   <ng-template #messageContainer>

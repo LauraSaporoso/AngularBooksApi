@@ -58,4 +58,12 @@ export class BookServiceService {
     div.innerHTML = htmlString;
     return div.innerText;
   }
+
+  isEmpty(): boolean {
+    if (this.searchResults.value.length == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

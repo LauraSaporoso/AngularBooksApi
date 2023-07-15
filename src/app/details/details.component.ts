@@ -26,7 +26,7 @@ export class DetailsComponent implements OnInit {
       const paramValue = params['idBook']; // Replace 'paramName' with the actual parameter name you're expecting
       this.idBookFromService = paramValue;
     });
-    console.log(this.specificBookDetails(this.idBookFromService));
+    this.specificBookDetails(this.idBookFromService);
   }
 
   specificBookDetails(bookId: string): void {
